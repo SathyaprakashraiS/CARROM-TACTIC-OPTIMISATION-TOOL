@@ -1,0 +1,19 @@
+*KEY*
+1>basic array notation of a carrom board which will be turned into a image reading real time camera feed of grayscale value
+2>the input that is got from the user about the location of the coin they would like to pocket in array notation
+3>calculated slope found using the coin location and the nearest pocket that it can be put into
+4>nearest pocket to the coin
+5>the found position which indicates the best spot for the coin to be so it can be cleanly pocketed easily that is the position it must be so that the coin is linear to the pocket which makes the slope=1
+6>same as 5 but stating if coin was at that angle it can be easily pocketed
+7>using pythagores theorem we fing opposite,adjacent,hypotenuse side that can be formed using the found three points (coin current location,pocket location,imaginary coin location) and find sin inverse degree of the formed triangle
+8>give an attack strategy
+9>actually this aint a sin inverse value nor i do not know what this junk value is thats why i asked u to check math.asin, if math.asin works in this position degree will be put in
+
+this is done for now other updates will be done later still speed the coin to be travelled is not found nor the stricker conditions are not solved hope we complete this problem :)
+ 
+*THINGS TO BE DONE*
+1>find any coin between striker coin
+2>find any coin between coin and pocket
+3>collision control
+4>speed transfer
+(if there is something i have forgot do remind or add it il to do it if i remember something)
