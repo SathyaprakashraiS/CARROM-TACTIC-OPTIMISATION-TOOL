@@ -373,27 +373,47 @@ def triangle(q,w,e,r,t,y):#er pocketloc qw coinloc ty newcoinloc
 	return o,a,h,degree
 def straightstricker():
 	print("straight stricker function")
-pockets=["9,0","9,9","0,0","0,9"]
+#pockets=["9,0","9,9","0,0","0,9"]
+pockets=["1277,186","596,186","1277,864","596,864"]
 pocketslope=["0","0","0","0"]
 playerpos=["1,1","1,8"]
-boardleft=0 #of y
-boardright=9#of y
-boardtop=9 #of x
-boardbottom=0#of x
+#boardleft=0 #of y
+boardleft=596
+#boardright=9#of y
+boardright=1277
+#boardtop=9 #of x
+boardtop=186
+#boardbottom=0#of x
+boardbottom=864
 whitemass=5
 blackmass=5
 redmass=5
 strickermass=5
 timel=0.3
 timeh=0.7
-boardymedian=(boardright-boardleft)/2
-boardxmedian=(boardtop-boardbottom)/2
+
+#boardxmedian=abs((boardright-boardleft)/2)
+#boardymedian=abs((boardtop-boardbottom)/2)
+boardxmedian=955
+boardymedian=517
+
+print("BOARD X MEDIAN :",boardxmedian)
+print("BOARD Y MEDIAN :",boardymedian)
+lan=[]
 print("which coin do you want to pocket ? enter the location of it")
 x=int(input("xaxis :"))
 y=int(input("yaxis :"))
-coingraph[x][y]=1
+ssx=int(input("striker lane starting x co-ordinate"))#stricker lan start x coord
+lan.append(ssx)
+ssy=int(input("stricker lane starting y co-ordinate"))#stricker lan start y coord
+lan.append(ssy)
+sex=int(input("stricker lane ending x co-ordinate"))#stricker lan end x coord
+lan.append(sex)
+sey=int(input("stricker lane ending y co-ordinate"))#stricker lan end y coord
+lan.append(sey)
+#coingraph[x][y]=1
 print(x,y)
-mindis=999
+mindis=9999
 flagpocket=0
 for i in range(len(pockets)):
 	spocket=pockets[i]
@@ -438,39 +458,76 @@ if(int(xpocket)==int(x) or int(ypocket)==int(y)):
 else:
 	print("rty")
 	online=0
+#COMMENTED FOR TEST PURPOSE
+'''
 if(slope!=1 and online==0):
 	posx,posy=straightline(slope,xpocket,ypocket,x,y)
 	print("the position to be moved is :",posx,posy)
-	#find triangle
 	opposite,adjacent,hypotenuse,degree=triangle(x,y,xpocket,ypocket,posx,posy)#qwerty
 	print("opposite :",opposite,"adjacent :",adjacent,"hypotenuse :",hypotenuse,"degree :",degree)
-	if(y>((boardtop-boardbottom)/2)):
-		if(x>((boardright-boardleft)/2)):
+	print("opposite :",opposite,"adjacent :",adjacent,"hypotenuse :",hypotenuse,"degree :",degree)
+	if(y>boardymedian):
+		if(x>boardxmedian):
 			print("attack coin at a angle of ",degree,"degree bottomleft side of the coin")
 		if(x<=((boardright-boardleft)/2)):
 			print("attack coin at a angle of ",degree,"degree bottomright side of the coin")
-	elif(y<((boardtop-boardbottom)/2)):
-		if(x>((boardright-boardleft)/2)):
+	elif(y<boardymedian):
+		if(x>boardxmedian):
 			print("attack coin at a angle of ",degree,"degree topleft side of the coin")
 			print("or maybe try a backshot the strategy on build")
-		if(x<=((boardright-boardleft)/2)):
+		if(x<=boardxmedian):
 			print("attack coin at a angle of ",degree,"degree topright side of the coin")
 			print("or maybe try a backshot the strategy on build")
-		#print("attack coin at a angle of ",degree,"degree below the coin")
 	else:
 		print("no possible moves can be made to pocket the coin")
 else:
 	print("coin is straight to the pocket")
-	if(x>((boardright-boardleft)/2)):
-		if(y>((boardtop-boardbottom)/2) and (x==int(xpocket))):
+	if(x>boardxmedian):
+		if(y>boardymedian and (x==int(xpocket))):
 			print("attack the coin left side of it parallely")
 		if(y<((boardtop-boardbottom)/2) and (x==int(xpocket))):
 			print("backshot to be attempted as in build")
-	if(x<((boardright-boardleft)/2)):
-		if(y>((boardtop-boardbottom)/2) and (x==int(xpocket))):
+	if(x<boardxmedian):
+		if(y>boardymedian and (x==int(xpocket))):
 			print("attack the coin right side of it parallely ")
-		if(y<((boardtop-boardbottom)/2) and (x==int(xpocket))):
+		if(y<boardymedian and (x==int(xpocket))):
 			print("backshot to be attempted as in build")
+'''
+
+if(slope!=1 and online==0):
+	posx,posy=straightline(slope,xpocket,ypocket,x,y)
+	print("the position to be moved is :",posx,posy)
+	opposite,adjacent,hypotenuse,degree=triangle(x,y,xpocket,ypocket,posx,posy)#qwerty
+	print("opposite :",opposite,"adjacent :",adjacent,"hypotenuse :",hypotenuse,"degree :",degree)
+	print("opposite :",opposite,"adjacent :",adjacent,"hypotenuse :",hypotenuse,"degree :",degree)
+	if(y<boardymedian):
+		if(x<=boardxmedian):
+			print("attack coin at a angle of ",degree,"degree bottomright side of the coin")
+		if(x>boardxmedian):
+			print("attack coin at a angle of ",degree,"degree bottomleft side of the coin")
+	elif(y>boardymedian):
+		if(x<=boardxmedian):
+			print("attack coin at a angle of ",degree,"degree topright side of the coin")
+			print("or maybe try a backshot the strategy on build")
+		if(x>boardxmedian):
+			print("attack coin at a angle of ",degree,"degree topleft side of the coin")
+			print("or maybe try a backshot the strategy on build")
+	else:
+		print("no possible moves can be made to pocket the coin")
+else:
+	print("coin is straight to the pocket")
+	if(x<boardxmedian):
+		if(y<=boardymedian and (x==int(xpocket))):
+			print("attack the coin left side of it parallely")
+		if(y>((boardtop-boardbottom)/2) and (x==int(xpocket))):
+			print("backshot to be attempted as in build")
+	if(x>boardxmedian):
+		if(y<=boardymedian and (x==int(xpocket))):
+			print("attack the coin right side of it parallely ")
+		if(y>boardymedian and (x==int(xpocket))):
+			print("backshot to be attempted as in build")
+
+
 print("calculating speed")
 if(y>((boardtop-boardbottom)/2)):
 	print("assuming time is 0.3")
@@ -479,10 +536,14 @@ if(y>((boardtop-boardbottom)/2)):
 	speed1=speed*3779
 	speed2=speed/3779
 	speed3=3779/speed
+	speed4=(int(opposite)*0.0002645833)/timel
+	speed5=((int(opposite)*0.0002645833)*100)/timel
 	print("speed :",speed)
 	print("speed1 :",speed1)
 	print("speed2 :",speed2)
 	print("speed3 :",speed3)
+	print("speed4 :",speed4)
+	print("speed5 :",speed5 ,"cm/s")
 if(y<((boardtop-boardbottom)/2)):
 	print("assuming time is 0.7")
 	print("distance :",opposite,"time :",timeh)
@@ -490,10 +551,57 @@ if(y<((boardtop-boardbottom)/2)):
 	speed1=speed*3779
 	speed2=speed/3779
 	speed3=3779/speed
+	speed4=(int(opposite)*0.0002645833)/timeh
+	speed5=((int(opposite)*0.0002645833)*100)/timeh
 	print("speed :",speed)
 	print("speed1 :",speed1)
 	print("speed2 :",speed2)
 	print("speed3 :",speed3)
+	print("speed4 :",speed4)
+	print("speed5 :",speed5,"cm/s")
+
+sslope=[]
+medianlane=(sex-ssx)/2
+if(x>medianlane):
+	sstartx=medianlane
+	temp=sstartx
+	send=lan[2]
+	for temp in range(send+1):
+		sslope.append((abs((x-temp))/abs((y-ssy))))
+		#print("")
+if(x<=medianlane):
+	sstartx=lan[0]
+	send=medianlane
+	temp=sstartx
+	for temp in range(send+1):
+		sslope.append((abs((x-temp))/abs((y-ssy))))
+		#print("")
+maxslope=0
+sdist=0
+tempsdist=0
+temp=ssx
+sposx=0
+sposy=0
+for i in range(len(sslope)):
+	if(maxslope<sslope[i]):
+		maxslope=sslope[i]
+		sdist=math.sqrt(((x-(temp+i))*(x-(temp+i)))+((y-ssy)*(y-ssy)))
+		sposx=temp+i
+		sposy=ssy
+	if(maxslope==sslope[i]):
+		tempsdist=math.sqrt(((x-(temp+i))*(x-(temp+i)))+((y-ssy)*(y-ssy)))
+		if(tempsdist<sdist):
+			maxslope=sslope[i]
+			sdist=tempsdist
+			sposx=temp+i
+			sposy=ssy
+		else:
+			sdist=math.sqrt(((x-(temp+i))*(x-(temp+i)))+((y-ssy)*(y-ssy)))
+print("MAX SLOPE :",maxslope,"DISTANCE BETWEEN STRICKER COIN :",sdist)
+print("STRICKER X CO-ORDINATES :",sposx,"STRICKER Y CO-ORDINATES :",sposy)
+# 1PIXEL IS 0.0002645833 METER
+# 1METER IS 3779 PIXEL 
+
 '''
 import numpy as np
 import cv2
